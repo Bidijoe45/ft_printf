@@ -6,11 +6,11 @@
 #    By: apavel <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/12 16:07:53 by apavel            #+#    #+#              #
-#    Updated: 2020/02/17 13:56:10 by apavel           ###   ########.fr        #
+#    Updated: 2020/02/18 13:03:23 by apavel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = ft_printf.c character_handler.c string_handler.c sinteger_handler.c
+SRCS = ft_printf.c character_handler.c string_handler.c sinteger_handler.c format_parser.c
 OBJS = ${SRCS:.c=.o}
 NAME = libftprintf.a
 CC = cc

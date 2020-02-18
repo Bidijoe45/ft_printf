@@ -6,7 +6,7 @@
 /*   By: apavel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 18:03:16 by apavel            #+#    #+#             */
-/*   Updated: 2020/02/17 17:29:15 by apavel           ###   ########.fr       */
+/*   Updated: 2020/02/18 18:53:49 by apavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <stdarg.h>
 
 # include "libft/libft.h"
-
 
 typedef struct Format
 {
@@ -41,6 +40,9 @@ int		string_handler(const char *str);
 int		sinteger_handler(int num);
 
 /*format_parser.c*/
-char	get_datatype(const char *format)
+char	get_datatype(const char *format);
+int		parse_flags(const char *format, Format *s_format);
+int		get_flags(const char *format, Format *s_format);
+int		get_width(const char *format, Format *s_format);
 
 #endif
