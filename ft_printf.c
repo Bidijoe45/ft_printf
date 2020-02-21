@@ -6,78 +6,57 @@
 /*   By: apavel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 13:49:25 by apavel            #+#    #+#             */
-/*   Updated: 2020/02/18 18:53:45 by apavel           ###   ########.fr       */
+/*   Updated: 2020/02/21 15:05:10 by apavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-#include <stdio.h>
+//-----BORRAR----------
 
-Format	*start_format()
+void	debug_print_s_flag(t_flags *flags)
 {
-	Format *format;
-	
-	format = malloc(sizeof(Format));
-	format->minus = -1;
-	format->zero = -1;
-	format->n = -1;
-	format->star = -1;
 
-	return (format);
+    printf("\n----FLAGS STRUCT----\n");
+  	printf("i: %d\n", flags->i); 
+  	printf("f_minus: %d\n", flags->f_minus); 
+  	printf("f_zero: %d\n", flags->f_zero); 
+  	printf("f_width: %d\n", flags->f_width);
+  	printf("n_width: %d\n", flags->n_width); 
+  	printf("f_star_width: %d\n", flags->f_star_width);
+	printf("f_precision: %d\n", flags->f_precision);
+	printf("n_precision: %d\n", flags->n_precision);
+  	printf("f_star_precision: %d\n", flags->f_star_precision);
+    printf("--------------------\n");
 }
 
-int		ft_print_format(va_list args, Format *s_format, char type)
-{
-	int ret;
+//---------------------
 
-	if (type == 'c')
-		ret = character_handler(va_arg(args, int));
-	else if (type == 's')
-		ret = string_handler(va_arg(args, char *));
-	else if (type == 'd' || type == 'i')
-		ret = sinteger_handler(va_arg(args, int));
-	else if (type == 'u')
-		printf("|Not implemented u|");
-	else if (type == 'p')
-		printf("|Not implemented p|");
-	else if (type == 'x')
-		printf("|Not implemented x|");
-	else if (type == 'X')	
-		printf("|Not implemented X|");
-	else if (type == '%')
-		write(1, "%", 1);
-	
-	return (ret);
+void	restart_flags(t_flags *flags, va_list args)
+{
+	flags->i = 0;
+	flags->f_minus = 0;
+	flags->f_zero = 0;
+	flags->f_width = 0;
+	flags->n_width = 0;
+	flags->f_star_width = 0;
+	flags->f_precision = 0;
+	flags->n_precision = 0;
+	flags->f_star_precision = 0;
+	va_copy(flags->args, args);
 }
 
 int		ft_printf(const char *format, ...)
 {
 	va_list args;
 	int i;
-	Format *s_format;
-	
-	s_format = start_format();
-	va_start(args, format);
-	i = 0;
-	
-	printf("num: %d\n", get_width("53002", s_format));
+	t_flags flags;
+	int ret;
 
-	/*
-	while (format[i] != '\0')
-	{
-		if (format[i] == '%')
-		{
-			i++;
-			parse_flags(&format[i], s_format);
-			ft_print_format(args, s_format, get_datatype(&format[i]));
-		}
-		else
-			write(1, &format[i], 1);
-		i++;
-	}
-	*/
-	free(s_format);	
-	return (1);
+	va_start(args, format);
+	restart_flags(&flags, args);
+	i = 0;
+	ret = ft_parse(&flags, format);
+	return (ret);
 }
 

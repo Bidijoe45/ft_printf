@@ -6,7 +6,7 @@
 /*   By: apavel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 18:03:16 by apavel            #+#    #+#             */
-/*   Updated: 2020/02/18 18:53:49 by apavel           ###   ########.fr       */
+/*   Updated: 2020/02/21 15:05:19 by apavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,37 @@
 
 # include "libft/libft.h"
 
-typedef struct Format
+//------BORRAR----
+# include <stdio.h>
+//----------------
+
+typedef struct s_flags
 {
-	short	minus;
-	short	zero;
-	int		n;
-	short	star;
-}	Format;
+	int		i;
+	short	f_minus;
+	short	f_zero;
+	short	f_width;
+	int		n_width;;
+	short	f_star_width;
+	short	f_precision;
+	int		n_precision;
+	short	f_star_precision;
+	va_list	args;
+}	t_flags;
 
 /*ft_printf.c*/
+//BORRAR
+void	debug_print_s_flag(t_flags *flag);
+//-----
 int		ft_printf(const char *format, ...);
 
-/*character_hanndler.c*/
-int		character_handler(int c);
+/*parse.c*/
+int		ft_parse(t_flags *flags, const char *format);
 
-/*string_handler.c*/
-int		string_handler(const char *str);
+/*display.c*/
+int		ft_display(t_flags *flags, char type);
 
-/*sinteger_handler.c*/
-int		sinteger_handler(int num);
-
-/*format_parser.c*/
-char	get_datatype(const char *format);
-int		parse_flags(const char *format, Format *s_format);
-int		get_flags(const char *format, Format *s_format);
-int		get_width(const char *format, Format *s_format);
+/*display_c.c*/
+int		ft_display_c(t_flags *flags);
 
 #endif
