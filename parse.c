@@ -6,7 +6,7 @@
 /*   By: apavel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 14:11:26 by apavel            #+#    #+#             */
-/*   Updated: 2020/02/21 15:20:04 by apavel           ###   ########.fr       */
+/*   Updated: 2020/02/23 09:03:56 by apavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,10 @@ void	ft_parse_width(t_flags *flags, const char *format)
 		if (format[i] == '*')
 		{
 			flags->f_star_width = 1;
+			flags->n_width = va_arg(flags->args, int);
 			return ;
 		}
-		else if (format[i] >= '1' && format[i] <= '9')
+		else if (format[i] >= '0' && format[i] <= '9')
 		{
 			flags->f_width = 1;
 			num = num * 10 + format[i] - '0';
@@ -69,11 +70,12 @@ void	ft_parse_precision(t_flags *flags, const char *format)
 		i++;
 	if (format[i] == '.')
 	{
+		flags->f_zero = 0;
 		flags->f_precision = 1;
 		i++;
 		if (format[i] == '*')
 		{
-			flags->f_star_precision = 1;
+			flags->f_star_precision = 1;	
 			return ;
 		}
 		while (format[i] >= '1' && format[i] <= '9')
@@ -97,25 +99,27 @@ char	ft_detect_type_and_display(t_flags *flags, const char *format)
 	return (i);
 }
 
-int		ft_parse(t_flags *flags, const char *format)
+int		ft_parse(t_flags *flags, va_list args ,const char *format)
 {
 	int i;
-	
+	int ret;
+		
 	i = 0;
 	while (format[i] != '\0')
 	{
 		if (format[i] == '%')
 		{
 			i++;
-			//ft_parse_flags(flags, &format[i]);
-			//ft_parse_width(flags, &format[i]);
-			//ft_parse_precision(flags, &format[i]);
-			i = i + ft_detect_type_and_display(flags, &format[i]) + 1;
+			ft_restart_flags(flags, args);
+			ft_parse_flags(flags, &format[i]);
+			ft_parse_width(flags, &format[i]);
+			ft_parse_precision(flags, &format[i]);
 			//debug_print_s_flag(flags);
+			i = i + ft_detect_type_and_display(flags, &format[i]) + 1;
+			ret += flags->printed;
 		}
 		write(1, &format[i], 1);
 		i++;
 	}
-
-	return (1);
+	return (ret);
 }
