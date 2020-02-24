@@ -6,7 +6,7 @@
 /*   By: apavel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 13:49:25 by apavel            #+#    #+#             */
-/*   Updated: 2020/02/23 09:04:01 by apavel           ###   ########.fr       */
+/*   Updated: 2020/02/24 12:42:58 by apavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 void	debug_print_s_flag(t_flags *flags)
 {
-
     printf("\n----FLAGS STRUCT----\n");
   	printf("printed: %d\n", flags->printed); 
   	printf("f_minus: %d\n", flags->f_minus); 
