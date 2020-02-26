@@ -6,7 +6,7 @@
 /*   By: apavel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 13:11:42 by apavel            #+#    #+#             */
-/*   Updated: 2020/02/25 19:04:15 by apavel           ###   ########.fr       */
+/*   Updated: 2020/02/26 17:23:28 by apavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ int		ft_display_width(t_flags *flags, char *num)
 	int i;
 	char empty_char;
 	int ret;
-
+	
+	ret = 0;
 	empty_char = (flags->f_zero && flags->f_precision == 0) ? '0' : ' ';
 	i = 0;
-	if (flags->f_width == 1)
+	if (flags->f_width == 1 && flags->n_width > ft_strlen(num))
 	{
-		//printf("w_Width: %lu \n", flags->n_width - ft_strlen(num));
 		if (flags->f_precision == 1 && flags->n_precision > ft_strlen(num))
 		{
 			if (num[0] == '-')
@@ -35,7 +35,6 @@ int		ft_display_width(t_flags *flags, char *num)
 			while (i++ < flags->n_width - ft_strlen(num))
 				ret += write(1, &empty_char, 1);
 	}
-	printf("ft_display_width ret: %d\n", ret);
 	return (ret);
 }
 
@@ -48,7 +47,7 @@ int		ft_display_precision(t_flags *flags, char *num)
 	if (flags->n_precision > ft_strlen(num))
 	{
 		if (num[0] == '-')
-			write(1, "-", 1);
+			ret += write(1, "-", 1);
 		i = 0;
 		if (num[0] == '-')
 		{
@@ -62,13 +61,27 @@ int		ft_display_precision(t_flags *flags, char *num)
 				ret += write(1, "0", 1);
 		}
 	}
-	printf("ft_display_precision ret: %d\n", ret);
 	return (ret);
 }
 
-void	ft_display_int_inverse(t_flags *flags)
+void	ft_display_int_inverse(t_flags *flags, char *num)
 {
-	write(1, "INVERSE\n", 8);
+
+	flags->printed += ft_display_precision(flags, num);
+		
+	if (num[0] == '-' && flags->f_zero == 1)
+	{
+		num++;
+		flags->printed += write(1, num, ft_strlen(num));
+		free(--num);
+	}
+	else
+	{
+		flags->printed += write(1, num, ft_strlen(num));
+		free(num);
+	}
+	flags->printed += ft_display_width(flags, num);
+
 }
 
 int		ft_display_int(t_flags *flags)
@@ -79,25 +92,24 @@ int		ft_display_int(t_flags *flags)
 	ret = 0;
 	num = ft_itoa(va_arg(flags->args, int));
 	if (flags->f_minus == 1)
-		ft_display_int_inverse(flags);
+		ft_display_int_inverse(flags, num);
 	else
 	{
-		if (num[0] == '-' && flags->f_precision == 0 && flags->f_zero == 1)
-			ret += write(1, "-", 1);
-		ret += ft_display_width(flags, num);
-		ret += ft_display_precision(flags, num);
+		if (num[0] == '-' && flags->f_zero == 1)
+			flags->printed += write(1, "-", 1);
+		flags->printed += ft_display_width(flags, num);
+		flags->printed += ft_display_precision(flags, num);
+		if (num[0] == '-' && (flags->f_zero == 1 || flags->n_precision > 0))
+		{
+			num++;
+			flags->printed += write(1, num, ft_strlen(num));
+			free(--num);
+		}
+		else
+		{
+			flags->printed += write(1, num, ft_strlen(num));
+			free(num);
+		}
 	}
-	if (num[0] == '-')
-	{
-		num++;
-		ret = write(1, num, ft_strlen(num));
-		free(--num);
-	}
-	else
-	{
-		ret = write(1, num, ft_strlen(num));
-		free(num);
-	}
-	printf("ret: %d\n", ret);
 	return (flags->printed);
 }
