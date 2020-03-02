@@ -6,7 +6,7 @@
 /*   By: apavel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 14:11:26 by apavel            #+#    #+#             */
-/*   Updated: 2020/02/26 17:24:54 by apavel           ###   ########.fr       */
+/*   Updated: 2020/03/02 15:54:22 by apavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,16 +107,17 @@ int		ft_parse(t_flags *flags, va_list args, const char *format)
 	int test = 0;
 	ret = 0;
 	i = 0;
+	ft_start_flags(flags, args);
 	while (format[i] != '\0')
 	{
 		if (format[i] == '%')
 		{
 			i++;
-			ft_restart_flags(flags, args);
+			ft_restart_flags(flags);
 			ft_parse_flags(flags, &format[i]);
 			ft_parse_width(flags, &format[i]);
 			ft_parse_precision(flags, &format[i]);
-			debug_print_s_flag(flags);
+			//debug_print_s_flag(flags);
 			i = i + ft_detect_type_and_display(flags, &format[i]);
 			ret += flags->printed;
 		}

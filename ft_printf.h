@@ -6,7 +6,7 @@
 /*   By: apavel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 18:03:16 by apavel            #+#    #+#             */
-/*   Updated: 2020/02/26 17:12:33 by apavel           ###   ########.fr       */
+/*   Updated: 2020/03/02 15:59:56 by apavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ typedef struct s_flags
 
 /*ft_printf.c*/
 int		ft_printf(const char *format, ...);
-void	ft_restart_flags(t_flags *flags, va_list args);
+void	ft_start_flags(t_flags *flags, va_list args);
+void	ft_restart_flags(t_flags *flags);
 //BORRAR
 void	debug_print_s_flag(t_flags *flag);
 //-----
@@ -52,6 +53,9 @@ int		ft_display(t_flags *flags, char type);
 
 /*display_c.c*/
 int		ft_display_c(t_flags *flags);
+
+/*display_s.c*/
+int		ft_display_s(t_flags *flags);
 
 /*display_int.c*/
 int		ft_display_int(t_flags *flags);
