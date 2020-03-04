@@ -6,7 +6,7 @@
 /*   By: apavel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 12:28:49 by apavel            #+#    #+#             */
-/*   Updated: 2020/03/02 15:59:13 by apavel           ###   ########.fr       */
+/*   Updated: 2020/03/04 18:34:07 by apavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int		ft_display(t_flags *flags, char type)
 	if (type == 'd' || type == 'i')
 		ft_display_int(flags);
 	if (type == 'u')
-		printf("u type not implemented \n");
+		ft_display_u(flags);
 	if (type == 'x')
-		printf("x type not implemented \n");
+		ft_display_x(flags);
 	if (type == 'X')
-		printf("X type not implemented \n");
+		ft_display_x(flags);
 	return (0);
 }

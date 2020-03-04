@@ -6,7 +6,7 @@
 /*   By: apavel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 13:49:25 by apavel            #+#    #+#             */
-/*   Updated: 2020/03/02 15:52:25 by apavel           ###   ########.fr       */
+/*   Updated: 2020/03/04 18:34:08 by apavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	ft_start_flags(t_flags *flags, va_list args)
 	flags->f_precision = 0;
 	flags->n_precision = 0;
 	flags->f_star_precision = 0;
+	flags->type = 0;
 	va_copy(flags->args, args);
 
 }
@@ -57,6 +58,7 @@ void	ft_restart_flags(t_flags *flags)
 	flags->f_precision = 0;
 	flags->n_precision = 0;
 	flags->f_star_precision = 0;
+	flags->type = 0;
 }
 
 int		ft_printf(const char *format, ...)

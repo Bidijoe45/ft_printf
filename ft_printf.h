@@ -6,7 +6,7 @@
 /*   By: apavel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 18:03:16 by apavel            #+#    #+#             */
-/*   Updated: 2020/03/02 15:59:56 by apavel           ###   ########.fr       */
+/*   Updated: 2020/03/04 18:34:11 by apavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_flags
 	short	f_precision;
 	int		n_precision;
 	short	f_star_precision;
+	char	type;
 	va_list	args;
 }	t_flags;
 
@@ -59,5 +60,17 @@ int		ft_display_s(t_flags *flags);
 
 /*display_int.c*/
 int		ft_display_int(t_flags *flags);
+
+/*display_u.c*/
+int		ft_display_u(t_flags *flags);
+
+/*display_x.c*/
+int		ft_display_x(t_flags *flags);
+
+/*ft_itoa_u.c*/
+char	*ft_itoa_u(long n);
+
+/*ft_itox.c*/
+char	*ft_itox(unsigned int n, char type);
 
 #endif

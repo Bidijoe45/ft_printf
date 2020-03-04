@@ -6,7 +6,7 @@
 /*   By: apavel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 14:11:26 by apavel            #+#    #+#             */
-/*   Updated: 2020/03/02 15:54:22 by apavel           ###   ########.fr       */
+/*   Updated: 2020/03/04 18:34:05 by apavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	ft_parse_precision(t_flags *flags, const char *format)
 			flags->f_star_precision = 1;	
 			return ;
 		}
-		while (format[i] >= '1' && format[i] <= '9')
+		while (format[i] >= '0' && format[i] <= '9')
 		{
 			num = num * 10 + format[i] - '0';
 			i++;
@@ -94,6 +94,7 @@ int		ft_detect_type_and_display(t_flags *flags, const char *format)
 	i = 0;
 	while (!ft_strchr(g_flags, format[i]) && format[i] != '\0')
 		i++;
+	flags->type = format[i];
 	ft_display(flags, format[i]);
 
 	return (i);
@@ -117,7 +118,7 @@ int		ft_parse(t_flags *flags, va_list args, const char *format)
 			ft_parse_flags(flags, &format[i]);
 			ft_parse_width(flags, &format[i]);
 			ft_parse_precision(flags, &format[i]);
-			//debug_print_s_flag(flags);
+		//	debug_print_s_flag(flags);
 			i = i + ft_detect_type_and_display(flags, &format[i]);
 			ret += flags->printed;
 		}
