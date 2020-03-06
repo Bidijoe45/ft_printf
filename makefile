@@ -6,11 +6,11 @@
 #    By: apavel <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/12 16:07:53 by apavel            #+#    #+#              #
-#    Updated: 2020/03/04 17:30:55 by apavel           ###   ########.fr        #
+#    Updated: 2020/03/06 16:24:29 by apavel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = ft_printf.c parse.c display.c display_c.c display_int.c display_s.c display_u.c ft_itoa_u.c display_x.c ft_itox.c
+SRCS = ft_printf.c parse.c display.c display_c.c display_int.c display_s.c display_u.c ft_itoa_u.c display_x.c ft_itox.c display_p.c
 OBJS = ${SRCS:.c=.o}
 NAME = libftprintf.a
 CC = cc
@@ -39,6 +39,6 @@ libft:
 	cd libft && make
 
 test: ${NAME} libft
-	gcc printf_main.c -g -L. -lftprintf -o printf_test ${FLAGS}
+	gcc ${FLAGS} printf_main.c -g -L. -lftprintf -o printf_test
 
 .PHONY: all clean fclean bonus re printf_test

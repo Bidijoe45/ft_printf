@@ -6,7 +6,7 @@
 /*   By: apavel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 18:03:16 by apavel            #+#    #+#             */
-/*   Updated: 2020/03/04 18:34:11 by apavel           ###   ########.fr       */
+/*   Updated: 2020/03/06 20:25:10 by apavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,13 @@ int		ft_display_u(t_flags *flags);
 /*display_x.c*/
 int		ft_display_x(t_flags *flags);
 
+/*display_p.c*/
+int		ft_display_p(t_flags *flags);
+
 /*ft_itoa_u.c*/
 char	*ft_itoa_u(long n);
 
 /*ft_itox.c*/
-char	*ft_itox(unsigned int n, char type);
+char	*ft_itox(unsigned long n, char type);
 
 #endif
