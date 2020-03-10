@@ -6,7 +6,7 @@
 /*   By: apavel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 13:11:42 by apavel            #+#    #+#             */
-/*   Updated: 2020/03/06 20:25:08 by apavel           ###   ########.fr       */
+/*   Updated: 2020/03/10 12:17:56 by apavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void		ft_display_width(t_flags *flags, char *num)
 {
 	int		i;
 	char	empty_char;
+	int		len;
 
 	empty_char = (flags->f_zero && flags->f_precision == 0) ? '0' : ' ';
 	i = 0;
@@ -23,10 +24,9 @@ static void		ft_display_width(t_flags *flags, char *num)
 	{
 		if (flags->f_precision == 1 && flags->n_precision > ft_strlen(num))
 		{
-			if (num[0] == '-')
-				i++;
-			while (i++ < flags->n_width - ft_strlen(num) -
-				(flags->n_precision - ft_strlen(num)))
+			i = (num[0] == '-') ? 1 : 0;
+			while (i++ < (len = (flags->n_width - ft_strlen(num) -
+					(flags->n_precision - ft_strlen(num)))))
 				flags->printed += write(1, &empty_char, 1);
 		}
 		else
@@ -53,7 +53,7 @@ static void		ft_display_precision(t_flags *flags, char *num)
 		if (num[0] == '-')
 		{
 			num++;
-			while (i++ < flags->n_precision - ft_strlen(num))
+			while (i++ < flags->n_precision - (int)ft_strlen(num))
 				flags->printed += write(1, "0", 1);
 		}
 		else
@@ -72,7 +72,7 @@ static void		ft_display_int_inverse(t_flags *flags, char *num)
 	{
 		num++;
 		flags->printed += write(1, num, ft_strlen(num));
-		free(--num);
+		num--;
 	}
 	else
 	{
@@ -82,7 +82,6 @@ static void		ft_display_int_inverse(t_flags *flags, char *num)
 			return ;
 		}
 		flags->printed += write(1, num, ft_strlen(num));
-		free(num);
 	}
 	ft_display_width(flags, num);
 }
@@ -105,12 +104,11 @@ static void		ft_display_num(char *num, t_flags *flags)
 	{
 		num++;
 		flags->printed += write(1, num, ft_strlen(num));
-		free(--num);
+		--num;
 	}
 	else
 	{
 		flags->printed += write(1, num, ft_strlen(num));
-		free(num);
 	}
 }
 
@@ -123,5 +121,6 @@ int				ft_display_int(t_flags *flags)
 		ft_display_int_inverse(flags, num);
 	else
 		ft_display_num(num, flags);
+	free(num);
 	return (flags->printed);
 }

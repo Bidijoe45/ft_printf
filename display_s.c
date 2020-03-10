@@ -6,7 +6,7 @@
 /*   By: apavel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 15:58:46 by apavel            #+#    #+#             */
-/*   Updated: 2020/03/04 13:26:48 by apavel           ###   ########.fr       */
+/*   Updated: 2020/03/10 12:27:17 by apavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,7 @@ int				ft_display_s(t_flags *flags)
 
 	str = va_arg(flags->args, char *);
 	if (str == NULL)
-	{
 		str = "(null)";
-	}
 	if (flags->f_minus == 1)
 	{
 		if (flags->f_precision == 1 && flags->n_precision < ft_strlen(str))

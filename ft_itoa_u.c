@@ -6,7 +6,7 @@
 /*   By: apavel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 13:28:54 by apavel            #+#    #+#             */
-/*   Updated: 2020/03/04 13:51:01 by apavel           ###   ########.fr       */
+/*   Updated: 2020/03/10 12:54:32 by apavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void		ft_alloc_nums(char *str, long num, size_t div, int digits)
 	str[i] = '\0';
 }
 
-char			*ft_itoa_u(long	n)
+char			*ft_itoa_u(long n)
 {
 	char	*str;
 	int		i;

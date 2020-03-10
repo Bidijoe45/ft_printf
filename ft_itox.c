@@ -6,7 +6,7 @@
 /*   By: apavel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 13:28:54 by apavel            #+#    #+#             */
-/*   Updated: 2020/03/06 20:25:17 by apavel           ###   ########.fr       */
+/*   Updated: 2020/03/10 14:55:48 by apavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,19 @@ static unsigned long	ft_count_digits(unsigned long n)
 
 	digits = 1;
 	while (n / 16 > 0)
-	{		
+	{
 		digits++;
 		n = n / 16;
 	}
 	return (digits);
 }
 
-char			*ft_itox(unsigned long n, char type)
+char					*ft_itox(unsigned long n, char type)
 {
 	char	*str;
 	int		i;
 	int		digits;
-	
+
 	digits = ft_count_digits(n);
 	if (!(str = malloc(sizeof(char) * (digits + 1))))
 		return (NULL);

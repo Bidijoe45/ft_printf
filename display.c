@@ -6,7 +6,7 @@
 /*   By: apavel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 12:28:49 by apavel            #+#    #+#             */
-/*   Updated: 2020/03/06 13:22:29 by apavel           ###   ########.fr       */
+/*   Updated: 2020/03/10 14:46:50 by apavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@ int		ft_display(t_flags *flags, char type)
 {
 	if (type == 'c')
 		ft_display_c(flags);
-	if (type == 's')
+	else if (type == 's')
 		ft_display_s(flags);
-	if (type == 'p')
+	else if (type == 'p')
 		ft_display_p(flags);
-	if (type == 'd' || type == 'i')
+	else if (type == 'd' || type == 'i')
 		ft_display_int(flags);
-	if (type == 'u')
+	else if (type == 'u')
 		ft_display_u(flags);
-	if (type == 'x')
+	else if (type == 'x')
 		ft_display_x(flags);
-	if (type == 'X')
+	else if (type == 'X')
 		ft_display_x(flags);
 	return (0);
 }
